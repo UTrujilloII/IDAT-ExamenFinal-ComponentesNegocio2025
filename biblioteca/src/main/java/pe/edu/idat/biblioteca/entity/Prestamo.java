@@ -33,7 +33,7 @@ public class Prestamo {
     @Column(name = "fecha_entrega",nullable = false)
     private LocalDate fechaEntrega;
 
-    @Column(name = "fecha_entregada",nullable = false)
+    @Column(name = "fecha_entregada",nullable = true)
     private LocalDate fechaEntregada;
 
     @ManyToOne(fetch = FetchType.LAZY)
