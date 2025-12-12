@@ -1,0 +1,660 @@
+{
+	"info": {
+		"_postman_id": "04307c2c-9e88-4d63-bfc8-effcec900ed2",
+		"name": "LoginBiblioteca",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49625797",
+		"_collection_link": "https://valdiviezoateroyolijhunior-4748324.postman.co/workspace/Yoli-jhunior-Valdiviezo-Atero's~db791278-8fcd-452d-80ce-b7675bf07f71/collection/49625797-04307c2c-9e88-4d63-bfc8-effcec900ed2?action=share&source=collection_link&creator=49625797"
+	},
+	"item": [
+		{
+			"name": "ListarUsuariosdesdeADMIN",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTMzOTQ2NiwiZXhwIjoxNzY1MzQzMDY2fQ.vrvkaSWxbWJu3iUHwku6Cvp1D0yH1935W532EhOWAIqvKqHFcwJlmYy6pNY9tF8Y5DYNlzrfYlGtDgOu-gG3kw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login-generaToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTRAR-USUARIO",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuarioNuevoPrueba\",\r\n    \"password\": \"Password123\",\r\n    \"role\": \"USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN-USERNORMAL",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuarioM\",\r\n    \"password\": \"87654321\" \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREARUSUARIO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTQwMDk2NCwiZXhwIjoxNzY1NDg3MzY0fQ.W5kCMcBDw7TkqEDz8zfDNmDvyFsenIjl4llIHYYjco7CyKsCDXD4vODhRXEYPay9J2saohtE17iwdphKaH8sig",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"jhunior\",\r\n    \"email\": \"jhunior@idat.edu.pe\",\r\n    \"password\": \"12345678\",\r\n    \"rol\": \"ADMIN\" \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACTUALIZAR-USUARIO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTQwMzA4NCwiZXhwIjoxNzY1NDg5NDg0fQ.giHZaWUIw_M8ZQIpabmqOSjDt_Xp_rhDqNL9WpWrZnTydVdaezi6Sxz-eDS2WTmWC6IKfABr4DbUYL36OIAVMw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Adrian\",\r\n    \"email\": \"Adrian@idat.edu.pe\",\r\n    \"password\": \"12345678\",\r\n    \"rol\": \"ADMIN\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/usuarios/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"usuarios",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACTUALIZARUSUARIO-1CAMPO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTUxNTMyNSwiZXhwIjoxNzY1NjAxNzI1fQ.AwTwRoahlcHE4PumOOAXXgw8y_6bNYpuEuKNV3idh-gH1HlMd49XN7IgXP9sQ2Hg7GbvqghGkUq19yhZGqzVRA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Jhunior David\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/usuarios/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"usuarios",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR-ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTUwODA1MiwiZXhwIjoxNzY1NTk0NDUyfQ.F3d-m4m8T9JB81Owm_hp8oJBG0RnEf00ryWpr1FfH39CarQUtRCgJci_60B5QMp5ZShwjMFZUDDk08Y5_DIEZw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9596/v1/usuarios/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"usuarios",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR(USUARIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTaXJpIiwiaWF0IjoxNzY1NTEwNzgwLCJleHAiOjE3NjU1OTcxODB9.JVuLDiQpXX1unLfPmKfiSckmjzd14kUmT4KWbX65ewcH0xPBeFcnjqnjZCo6IITPUM8HLThM5TlkqwQR5gLgWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9596/v1/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LISTARLIBRO(USUARIO)",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "LISTARLIBROS-ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTM1MjYxNiwiZXhwIjoxNzY1MzU2MjE2fQ.0rrurqdaLlKgR-jrb04LSbUbvsFDYrelZ0ayGwpZZDqwxyIDfGq6YUHZRvennR5Rh3DOCC83fx8NRHN8Jakt8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9596/v1/libros",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"libros"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AGREGARLIBRO",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "ACTUALIZAR-LIBRO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTM4NDUzNCwiZXhwIjoxNzY1Mzg4MTM0fQ.1yqk90qlcp9TjKX9rWlOCCF1PzNfA-LjPCKwVprFPHQECWzerakqRy3hekNnk-ruNSVjdU6cNiY2vekKMJQGAg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Cien años de soledadd\",\r\n    \"autor\": \"Gabriel García Márquez\",\r\n    \"editorial\": \"Alfaguara\",\r\n    \"anioPublicacion\": 1967,\r\n    \"isbn\": \"978-0307474728\",\r\n    \"cantidad\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/libros/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"libros",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR-LIBRO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTM4NDUzNCwiZXhwIjoxNzY1Mzg4MTM0fQ.1yqk90qlcp9TjKX9rWlOCCF1PzNfA-LjPCKwVprFPHQECWzerakqRy3hekNnk-ruNSVjdU6cNiY2vekKMJQGAg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9596/v1/libros/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"libros",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINARLIBRO-USER",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTaXJpIiwiaWF0IjoxNzY1NTEzOTgxLCJleHAiOjE3NjU2MDAzODF9.0UQ3a0F904YWStJvfu_FRo32oe4AdaaBMwRRyh_JFtztkA0YkBJJ3XwqcVZGPpWl5a0Wx2lRzK7RPHpb5gFZ8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9596/v1/libros/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"libros",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HISTORIAL-USUARIO",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTRARPRESTAMO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTM5MDY4MywiZXhwIjoxNzY1Mzk0MjgzfQ.2k2P-2ea0WkSFXFADe63zltHWkVJ7DdNPTqBOnp-L3gY_P-qVWiolvgSAVAULJql0KAStamkj16pOgKvkplifw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuarioId\": 2,\r\n    \"libroId\": 1,\r\n    \"cantidad\": 2,\r\n    \"fechaDevolucionEstimada\": \"2025-12-17\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/prestamos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"prestamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEVOLVERLIBRO(ADMIN)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTM5OTkyMCwiZXhwIjoxNzY1NDAzNTIwfQ.p4cDODlv2A6nbPjB_q-i9ecoXX-F-gt1blYEdACx2YC67686tRjroAI--m10W5UUzxK2MAPH02QAQAUBusxNsA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9596/v1/prestamos/3/devolver",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"prestamos",
+						"3",
+						"devolver"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HISTORIALPRESTAMOS-ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTM5OTcyNywiZXhwIjoxNzY1NDAzMzI3fQ.m2D4iKCvfCqxEYAvGBbZJgmfZLkAV1cnZYjF8u7kmF1OIo5IDWRjzG2a1I-fPdxNgrmZgr-xnj64iyvnPN7Lcw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9596/v1/prestamos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"prestamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "ACTUALIZARLIBRO-1CAMPO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NTUxNjIzOCwiZXhwIjoxNzY1NjAyNjM4fQ.IzuTa90bBM6Fsjf7mW3PJ597lsU0UNoTgU5c9Egd_bZiWqP2-YFYT2SA1PCBWUGzGf6VAWcAmUpopSomDH7ZBA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cantidad\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9596/v1/libros/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9596",
+					"path": [
+						"v1",
+						"libros",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

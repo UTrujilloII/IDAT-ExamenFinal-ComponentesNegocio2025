@@ -1,0 +1,82 @@
+package pe.edu.idat.biblioteca.mappers;
+
+import java.time.LocalDate;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+import pe.edu.idat.biblioteca.dto.prestamo.PrestamoResponse;
+import pe.edu.idat.biblioteca.entity.EstadoPrestamo;
+import pe.edu.idat.biblioteca.entity.Libro;
+import pe.edu.idat.biblioteca.entity.Prestamo;
+import pe.edu.idat.biblioteca.entity.Usuario;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2025-12-12T01:42:35-0500",
+    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.7 (Oracle Corporation)"
+)
+@Component
+public class PrestamoMapperImpl implements PrestamoMapper {
+
+    @Override
+    public PrestamoResponse toResponse(Prestamo prestamo) {
+        if ( prestamo == null ) {
+            return null;
+        }
+
+        Long usuarioId = null;
+        String username = null;
+        Long libroId = null;
+        String tituloLibro = null;
+        EstadoPrestamo estado = null;
+        Long id = null;
+        LocalDate fechaPrestamo = null;
+        LocalDate fechaDevolucionEstimada = null;
+        LocalDate fechaDevolucionReal = null;
+
+        usuarioId = prestamoUsuarioId( prestamo );
+        username = prestamoUsuarioUsername( prestamo );
+        libroId = prestamoLibroId( prestamo );
+        tituloLibro = prestamoLibroTitulo( prestamo );
+        estado = prestamo.getEstado();
+        id = prestamo.getId();
+        fechaPrestamo = prestamo.getFechaPrestamo();
+        fechaDevolucionEstimada = prestamo.getFechaDevolucionEstimada();
+        fechaDevolucionReal = prestamo.getFechaDevolucionReal();
+
+        PrestamoResponse prestamoResponse = new PrestamoResponse( id, usuarioId, username, libroId, tituloLibro, fechaPrestamo, fechaDevolucionEstimada, fechaDevolucionReal, estado );
+
+        return prestamoResponse;
+    }
+
+    private Long prestamoUsuarioId(Prestamo prestamo) {
+        Usuario usuario = prestamo.getUsuario();
+        if ( usuario == null ) {
+            return null;
+        }
+        return usuario.getId();
+    }
+
+    private String prestamoUsuarioUsername(Prestamo prestamo) {
+        Usuario usuario = prestamo.getUsuario();
+        if ( usuario == null ) {
+            return null;
+        }
+        return usuario.getUsername();
+    }
+
+    private Long prestamoLibroId(Prestamo prestamo) {
+        Libro libro = prestamo.getLibro();
+        if ( libro == null ) {
+            return null;
+        }
+        return libro.getId();
+    }
+
+    private String prestamoLibroTitulo(Prestamo prestamo) {
+        Libro libro = prestamo.getLibro();
+        if ( libro == null ) {
+            return null;
+        }
+        return libro.getTitulo();
+    }
+}
