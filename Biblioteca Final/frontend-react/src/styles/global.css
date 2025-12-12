@@ -1,0 +1,67 @@
+/* ---------------------------------------------------
+      GLOBAL CYBERPUNK STYLE
+---------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Orbitron", sans-serif;
+    background: radial-gradient(circle at top, #0a0018, #050008, #000);
+    color: #ffffff;
+    min-height: 100vh;
+
+    /* Glow leve global */
+    text-shadow: 0 0 4px #0000a5;
+}
+
+/* Cada página tendrá un contenedor bonito */
+.page-container {
+    padding: 35px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+/* Títulos estilo neón */
+.page-title {
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+    text-shadow:
+        0 0 8px #ff00e6,
+        0 0 12px #00eaff,
+        0 0 18px #ff00e6;
+}
+
+/* Tarjetas cyberpunk */
+.card {
+    background: rgba(10, 0, 25, 0.7);
+    border: 1px solid #ff00e6;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 14px #ff00e688;
+    backdrop-filter: blur(4px);
+}
+
+/* Botón general (puede usarse en páginas) */
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 1px solid #ff00e6;
+    background: transparent;
+    color: #ff00e6;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    background: #ff00e6;
+    color: #120012;
+    box-shadow: 0 0 20px rgb(17, 0, 255);
+}
+

@@ -1,0 +1,238 @@
+/* -------------------------
+     CYBERPUNK DARK NAVBAR
+   ------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 30px;
+    background: #07070c;
+    border-bottom: 2px solid #ff00e6;
+    box-shadow: 0 0 20px #ff00e633, 0 0 40px #8a00d466 inset;
+    font-family: 'Orbitron', sans-serif;
+    z-index: 999;
+}
+
+/* ------------------------------------
+      LOGO - ULTRA RGB GLITCH CHAOS
+   ------------------------------------ */
+
+.nav-logo a {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-shadow: 0 0 12px #ff00e6;
+    
+    animation:
+        rgbPulse 1.4s infinite alternate,
+        glitchShake 0.12s infinite,
+        flicker 4s infinite;
+}
+
+/* CAPAS RGB + ECO EXTRA */
+.nav-logo a::before,
+.nav-logo a::after,
+.nav-logo a .glitch-r,
+.nav-logo a .glitch-g,
+.nav-logo a .glitch-b {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.9;
+}
+
+/* RGB principales */
+.nav-logo a::before { color: #ff004c; animation: glitchRed 0.18s infinite; }
+.nav-logo a::after  { color: #00ffa6; animation: glitchGreen 0.22s infinite; }
+
+/* ECO RGB */
+.nav-logo a .glitch-r { color: #ff0000; animation: echoR 1.2s infinite; opacity: 0.25; }
+.nav-logo a .glitch-g { color: #00ff00; animation: echoG 1.5s infinite; opacity: 0.25; }
+.nav-logo a .glitch-b { color: #0077ff; animation: glitchBlue 0.3s infinite, echoB 1.1s infinite; opacity: 0.25; }
+
+/* Pulsos, glitches y efectos */
+@keyframes rgbPulse {
+    0% { text-shadow: 0 0 4px #ff00e6; }
+    50% { text-shadow: 0 0 14px #00f2ff; }
+    100% { text-shadow: 0 0 22px #ff003c; }
+}
+
+@keyframes glitchRed {
+    0%   { transform: translate(0); clip-path: inset(0 0 85% 0); }
+    20%  { transform: translate(-4px, -2px); clip-path: inset(45% 0 25% 0); }
+    40%  { transform: translate(6px, 2px); clip-path: inset(10% 0 60% 0); }
+    60%  { transform: translate(-3px, 4px); clip-path: inset(70% 0 8% 0); }
+    80%  { transform: translate(5px, -4px); clip-path: inset(5% 0 70% 0); }
+    100% { transform: translate(0); clip-path: inset(40% 0 0 0); }
+}
+
+@keyframes glitchGreen {
+    0%   { transform: translate(0); clip-path: inset(70% 0 0 0); }
+    25%  { transform: translate(5px, -3px); clip-path: inset(15% 0 50% 0); }
+    50%  { transform: translate(-4px, 3px) skew(2deg); clip-path: inset(50% 0 25% 0); }
+    75%  { transform: translate(2px, -5px); clip-path: inset(0 0 85% 0); }
+    100% { transform: translate(0); clip-path: inset(30% 0 10% 0); }
+}
+
+@keyframes glitchBlue {
+    0%   { transform: translate(0); opacity: 0.5; }
+    33%  { transform: translate(-5px, 4px); opacity: 1; }
+    66%  { transform: translate(6px, -5px); opacity: 0.8; }
+    100% { transform: translate(0); opacity: 1; }
+}
+
+@keyframes echoR {
+    0% { transform: translate(0); }
+    50% { transform: translate(-10px, 2px) scale(1.05); }
+    100% { transform: translate(0); }
+}
+@keyframes echoG {
+    50% { transform: translate(8px, -3px) scale(1.05); }
+}
+@keyframes echoB {
+    50% { transform: translate(-6px, -6px) scale(1.08); }
+}
+
+@keyframes glitchShake {
+    0%   { transform: translate(0) skew(0); }
+    20%  { transform: translate(-2px, 1px) skew(-2deg); }
+    40%  { transform: translate(2px, -2px) skew(3deg); }
+    60%  { transform: translate(-3px, 3px) skew(-1deg); }
+    80%  { transform: translate(3px, -1px) skew(2deg); }
+    100% { transform: translate(0) skew(0); }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 0.5; }
+    94% { opacity: 0; }
+    96% { opacity: 0.8; }
+}
+
+/* -------------------------
+        LINKS
+   ------------------------- */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    transition: 0.25s ease-in-out;
+    animation: rgbLinkPulse 2.5s infinite alternate;
+}
+
+/* Subrayado animado */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #ff004c, #00ffa6, #0077ff, #ff00e6);
+    background-size: 300%;
+    box-shadow: 0 0 12px #ff00e6;
+    transition: width 0.35s ease-in-out, background-position 0.5s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    background-position: 200%;
+}
+
+/* Pulso RGB */
+@keyframes rgbLinkPulse {
+    0%   { text-shadow: 0 0 6px #ff004c; color: #ff004c; }
+    33%  { text-shadow: 0 0 6px #00ffa6; color: #00ffa6; }
+    66%  { text-shadow: 0 0 6px #0077ff; color: #0077ff; }
+    100% { text-shadow: 0 0 6px #ff00e6; color: #ff00e6; }
+}
+
+/* Hover */
+.nav-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.05);
+    text-shadow:
+        0 0 10px #ff004c,
+        0 0 12px #00ffa6,
+        0 0 14px #0077ff,
+        0 0 16px #ff00e6;
+}
+
+/* -------------------------
+        BOTONES
+   ------------------------- */
+
+.nav-btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #1b001b, #3a003a);
+    border: 1px solid #ff00e6;
+    color: #ff00e6;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.25s;
+    box-shadow: 0 0 8px #ff00e644;
+}
+
+.nav-btn:hover {
+    background: #ff00e6;
+    color: #120012;
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px #ff00e6;
+}
+
+/* Usuario */
+.nav-user {
+    font-weight: 600;
+    letter-spacing: 1px;
+    animation: rgbUserPulse 2.5s infinite alternate;
+}
+
+@keyframes rgbUserPulse {
+    0%   { text-shadow: 0 0 8px #ff0000; color: #ff0000; }
+    33%  { text-shadow: 0 0 8px #00ff00; color: #00ff00; }
+    66%  { text-shadow: 0 0 8px #0077ff; color: #0077ff; }
+    100% { text-shadow: 0 0 8px #ff00e6; color: #ff00e6; }
+}
+
+/* Logout */
+.logout-btn {
+    padding: 7px 14px;
+    background: #ff0055;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.25s;
+    box-shadow: 0 0 10px #ff0055aa;
+}
+
+.logout-btn:hover {
+    background: #ff2a78;
+    box-shadow: 0 0 20px #ff2a78;
+    transform: scale(1.05);
+}
