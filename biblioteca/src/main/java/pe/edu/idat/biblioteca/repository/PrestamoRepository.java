@@ -30,14 +30,6 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
     // Cuenta los préstamos activos de un usuario
     @Query("SELECT COUNT(p) FROM Prestamo p WHERE p.usuario = :usuario AND p.estado = 'ACTIVO'")
     long countByUsuarioAndEstadoActivo(@Param("usuario") Usuario usuario);
-
-    // --- MÉTODO AÑADIDO PARA SOLUCIONAR ELIMINACIÓN DE USUARIO ---
-
-    /**
-     * Elimina todos los registros de préstamos asociados a un ID de usuario específico.
-     * Esto se usa para evitar la restricción de clave foránea al eliminar el usuario.
-     * @param usuarioId ID del usuario cuyos préstamos serán eliminados.
-     */
     @Modifying // Indica que la consulta modifica la base de datos
     @Query("DELETE FROM Prestamo p WHERE p.usuario.id = :usuarioId")
     void deleteByUsuarioId(@Param("usuarioId") Long usuarioId);

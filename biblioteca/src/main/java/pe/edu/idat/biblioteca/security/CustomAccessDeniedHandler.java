@@ -1,4 +1,4 @@
-package pe.edu.idat.biblioteca.security; // ¡AQUÍ ESTÁ LA CLAVE!
+package pe.edu.idat.biblioteca.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

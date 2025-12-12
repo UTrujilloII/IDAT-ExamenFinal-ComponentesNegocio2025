@@ -25,7 +25,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
-@Transactional // Usar transacciones para los métodos de modificación
+@Transactional
 public class AuthServiceImpl implements AuthService {
 
     private final AuthenticationManager authenticationManager;
@@ -58,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    @Transactional // Aseguramos la transacción para la creación
+    @Transactional
     public AuthResponse register(RegisterRequest request) {
 
         String usernameFromEmail = request.email().split("@")[0];
@@ -73,13 +73,11 @@ public class AuthServiceImpl implements AuthService {
         if (usuarioRepository.existsByUsername(usernameFromEmail)) {
             throw new RuntimeException("El nombre de usuario derivado del email ya existe.");
         }
-        // <-- ¡NUEVA VALIDACIÓN DE TELÉFONO! -->
         if (usuarioRepository.existsByTelefono(request.telefono())) {
             throw new RuntimeException("El número de teléfono ya está registrado.");
         }
 
         // --- 2. ASIGNACIÓN Y FORZADO DE ROL ---
-        // Ignoramos request.role() y forzamos el rol "USER"
         String rolBuscado = "USER";
 
         Rol rol = rolRepository.findByNombreIgnoreCase(rolBuscado)
@@ -96,13 +94,9 @@ public class AuthServiceImpl implements AuthService {
         // --- 4. ASIGNACIÓN DE CREDENCIALES ---
         usuario.setUsername(usernameFromEmail);
         usuario.setPassword(passwordEncoder.encode(request.password()));
-
-        // Asignación de rol forzado
         usuario.getRoles().add(rol);
 
         usuarioRepository.save(usuario);
-
-        // ... (Generación de Tokens) ...
         User userDetails = new User(
                 usuario.getUsername(),
                 usuario.getPassword(),

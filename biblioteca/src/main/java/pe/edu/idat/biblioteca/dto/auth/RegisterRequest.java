@@ -9,15 +9,15 @@ public record RegisterRequest(
 
         @NotBlank(message = "El DNI es obligatorio.")
         @Pattern(regexp = "^\\d{8}$", message = "El DNI debe tener exactamente 8 números.")
-        String dni, // CAMPO AÑADIDO
+        String dni,
 
         @NotBlank(message = "El nombre es obligatorio y no debe estar vacío.")
         @Size(min = 3, max = 50, message = "El nombre debe contener entre 3 y 50 caracteres.")
-        String nombre, // CAMPO AÑADIDO
+        String nombre,
 
         @NotBlank(message = "El email es obligatorio.")
         @Email(message = "El formato del email es inválido. Asegúrese de incluir '@'.")
-        String email, // Usado para el login/username
+        String email,
 
         @NotBlank(message = "La contraseña es obligatoria.")
         @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres.")
@@ -25,9 +25,7 @@ public record RegisterRequest(
 
         @NotBlank(message = "El número de teléfono es obligatorio.")
         @Pattern(regexp = "^\\d{9}$", message = "El teléfono debe tener exactamente 9 números.")
-        String telefono, // CAMPO AÑADIDO
-
-        // Se mantiene el campo 'role' como solicitaste
+        String telefono,
         @NotBlank(message = "El rol es obligatorio.")
         String role
 ) {}

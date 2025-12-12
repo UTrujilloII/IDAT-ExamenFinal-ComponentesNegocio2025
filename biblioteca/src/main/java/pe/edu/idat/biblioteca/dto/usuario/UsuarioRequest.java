@@ -30,5 +30,5 @@ public record UsuarioRequest(
         @NotBlank(message = "El número de teléfono es obligatorio.")
         // ^\d{9}$ -> Debe empezar (^) y terminar ($) con exactamente 9 dígitos (\d{9}).
         @Pattern(regexp = "^\\d{9}$", message = "El teléfono debe tener exactamente 9 números.")
-        String telefono // Asumo que lo tienes como String en tu entidad
+        String telefono
 ) {}

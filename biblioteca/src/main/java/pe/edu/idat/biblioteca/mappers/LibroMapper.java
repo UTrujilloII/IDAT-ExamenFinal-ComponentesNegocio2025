@@ -9,9 +9,6 @@ import pe.edu.idat.biblioteca.entity.Libro;
 
 @Mapper(componentModel = "spring")
 public interface LibroMapper {
-
-    // CORRECCIÓN: Cálculo para devolver "Sí" o "No" como String
-    // Expresión: (Si libro.cantidad > 0) ? "Sí" : "No"
     @Mapping(target = "disponible", expression = "java(libro.getCantidad() > 0 ? \"Sí\" : \"No\")")
     LibroResponse toResponse(Libro libro);
 

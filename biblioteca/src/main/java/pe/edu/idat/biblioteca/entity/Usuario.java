@@ -23,9 +23,6 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // --- CAMPOS AÑADIDOS/MODIFICADOS ---
-
     // DNI: Debe ser único, no nulo y de longitud exacta (8)
     @Column(length = 8, unique = true, nullable = false)
     private String dni;
@@ -33,8 +30,6 @@ public class Usuario implements UserDetails {
     // Teléfono: No nulo y de longitud exacta (9)
     @Column(length = 9, nullable = false)
     private String telefono;
-
-    // --- CAMPOS ORIGINALES ---
 
     @Column(length = 50, unique = true, nullable = false)
     private String username;
@@ -49,9 +44,6 @@ public class Usuario implements UserDetails {
     private String email;
 
     private boolean enabled = true;
-
-    // --- RELACIONES ---
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "usuario_rol",
@@ -62,9 +54,6 @@ public class Usuario implements UserDetails {
 
     @OneToMany(mappedBy = "usuario")
     private Set<Prestamo> prestamos;
-
-    // --- MÉTODOS DE USERDETAILS ---
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()

@@ -11,7 +11,7 @@ import pe.edu.idat.biblioteca.entity.Usuario;
 import pe.edu.idat.biblioteca.repository.LibroRepository;
 import pe.edu.idat.biblioteca.repository.RolRepository;
 import pe.edu.idat.biblioteca.repository.UsuarioRepository;
-import java.util.Set; // Necesario para asignar roles
+import java.util.Set;
 
 @SpringBootApplication
 public class BibliotecaApplication {
@@ -45,16 +45,11 @@ public class BibliotecaApplication {
                 admin.setUsername("admin");
                 admin.setPassword(passwordEncoder.encode("123456"));
                 admin.setNombre("Administrador Central");
-
-                // --- ¡CAMPOS REQUERIDOS CORREGIDOS! ---
-                admin.setDni("11111111");     // DNI VÁLIDO
+                admin.setDni("11111111");
                 admin.setEmail("admin@biblioteca.com");
-                admin.setTelefono("900000000"); // TELÉFONO VÁLIDO
-                // ------------------------------------
-
-                admin.setRoles(Set.of(rolAdmin)); // Usar Set.of()
+                admin.setTelefono("900000000");
+                admin.setRoles(Set.of(rolAdmin));
                 usuarioRepo.save(admin);
-
                 System.out.println("✔ ADMIN CREADO → user: admin | pass: 123456");
             }
 
@@ -64,14 +59,11 @@ public class BibliotecaApplication {
                 user.setUsername("user");
                 user.setPassword(passwordEncoder.encode("123456"));
                 user.setNombre("Estudiante General");
-
-                // --- ¡CAMPOS REQUERIDOS CORREGIDOS! ---
-                user.setDni("22222222");     // DNI VÁLIDO
+                user.setDni("22222222");
                 user.setEmail("user@biblioteca.com");
-                user.setTelefono("911111111"); // TELÉFONO VÁLIDO
-                // ------------------------------------
+                user.setTelefono("911111111");
 
-                user.setRoles(Set.of(rolUser)); // Usar Set.of()
+                user.setRoles(Set.of(rolUser));
                 usuarioRepo.save(user);
 
                 System.out.println("✔ USER CREADO → user: user | pass: 123456");
@@ -79,7 +71,6 @@ public class BibliotecaApplication {
 
             // 4. CREACIÓN DE LIBROS INICIALES
             if (libroRepo.count() == 0) {
-                // ... (El resto de la lógica de libros se mantiene)
                 Libro l1 = new Libro();
                 l1.setTitulo("Cien años de soledad");
                 l1.setAutor("Gabriel García Márquez");

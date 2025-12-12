@@ -8,8 +8,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.idat.biblioteca.dto.libro.LibroRequest;
 import pe.edu.idat.biblioteca.dto.libro.LibroResponse;
-import pe.edu.idat.biblioteca.dto.libro.LibroPatchRequest; // ¡NUEVO IMPORT!
-import pe.edu.idat.biblioteca.service.impl.LibroService; // Asumo que es tu interfaz
+import pe.edu.idat.biblioteca.dto.libro.LibroPatchRequest;
+import pe.edu.idat.biblioteca.service.impl.LibroService;
 
 import java.util.List;
 

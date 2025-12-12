@@ -4,9 +4,9 @@ import java.util.Set;
 
 public record UsuarioResponse(
         Long id,
-        String dni,          // <--- CAMPO AÑADIDO
+        String dni,
         String nombre,
         String email,
-        String telefono,     // <--- CAMPO AÑADIDO
+        String telefono,
         Set<String> roles
 ) {}

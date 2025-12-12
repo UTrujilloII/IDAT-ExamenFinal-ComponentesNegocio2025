@@ -1,4 +1,3 @@
-// Archivo: PrestamoItemRequest.java
 package pe.edu.idat.biblioteca.dto.prestamo;
 
 import jakarta.validation.constraints.Min;

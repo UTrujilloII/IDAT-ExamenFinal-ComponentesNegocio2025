@@ -11,7 +11,7 @@ import pe.edu.idat.biblioteca.entity.Usuario;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-12-12T01:42:35-0500",
+    date = "2025-12-12T12:26:34-0500",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.7 (Oracle Corporation)"
 )
 @Component

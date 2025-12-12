@@ -22,7 +22,7 @@ import pe.edu.idat.biblioteca.security.jwt.JwtAuthFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity // CRÍTICO: Habilita el uso de @PreAuthorize
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -44,18 +44,11 @@ public class SecurityConfig {
                         // Usamos hasAnyAuthority para coincidir directamente con el "ROLE_X" del token.
                         .requestMatchers(HttpMethod.GET, "/v1/prestamos/historial").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                         .requestMatchers(HttpMethod.GET, "/v1/libros").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-
-                        // 3. Eliminamos reglas de URL conflictivas:
-                        // Los endpoints /v1/libros/**, /v1/prestamos/**, /v1/usuarios/**
-                        // ahora se protegen EXCLUSIVAMENTE con @PreAuthorize.
-
-                        // 4. Cualquier otra solicitud requiere estar autenticado (tener un token válido).
-                        // El chequeo de rol (ADMIN vs USER) se realiza en el método del controlador.
                         .anyRequest().authenticated()
                 )
                 // Configuración de errores
                 .exceptionHandling(exceptions -> exceptions
-                        .accessDeniedHandler(accessDeniedHandler) // Muestra el mensaje JSON 403
+                        .accessDeniedHandler(accessDeniedHandler)
                 )
                 // Configuración JWT
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -64,8 +57,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-    // --- Métodos de Autenticación y Cifrado (Sin Cambios) ---
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
