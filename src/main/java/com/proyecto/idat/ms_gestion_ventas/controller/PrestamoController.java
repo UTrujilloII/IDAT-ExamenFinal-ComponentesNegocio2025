@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api/prestamos")
 @RequiredArgsConstructor
@@ -92,17 +93,24 @@ public class PrestamoController {
         return ResponseEntity.ok(response);
     }
 
-    // USUARIO cancela uno de sus préstamos (solo si está ACTIVO)
+    // USUARIO cancela / elimina uno de sus préstamos (solo si está ACTIVO)
     @PreAuthorize("hasRole('USUARIO')")
     @DeleteMapping("/mis-prestamos/{idPrestamo}")
-    public ResponseEntity<Void> cancelarMiPrestamo(
+    public ResponseEntity<Map<String, Object>> cancelarMiPrestamo(
             @PathVariable Long idPrestamo,
             Authentication auth
     ) {
         String username = auth.getName();
         prestamoService.eliminarPrestamoUsuario(idPrestamo, username);
-        return ResponseEntity.noContent().build();
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("mensaje", "Préstamo eliminado correctamente");
+        body.put("idPrestamoEliminado", idPrestamo);
+        body.put("accion", "CANCELACION_PROPIA");
+
+        return ResponseEntity.ok(body);
     }
+
 
     // ADMIN actualiza préstamo de cualquier usuario
     @PreAuthorize("hasRole('ADMIN')")

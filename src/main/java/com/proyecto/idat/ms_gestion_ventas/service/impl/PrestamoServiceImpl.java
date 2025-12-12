@@ -143,9 +143,11 @@ public class PrestamoServiceImpl implements PrestamoService {
             );
         }
 
+        // se marca como devuelto
         prestamo.setEstado("DEVUELTO");
         prestamo.setFechaDevolucion(LocalDate.now());
 
+        // se devuelve al stock del libro
         Libro libro = prestamo.getLibro();
         libro.setEjemplaresDisponibles(libro.getEjemplaresDisponibles() + 1);
 
