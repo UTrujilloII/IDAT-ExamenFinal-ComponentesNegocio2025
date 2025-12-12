@@ -1,0 +1,149 @@
+### ==========================================
+### MS-BANCARIO - Ejemplos de peticiones HTTP
+### ==========================================
+### Archivo compatible con IntelliJ HTTP Client
+### También puedes importar estos ejemplos a Postman
+### ==========================================
+
+### Variables
+@baseUrl = http://localhost:9595
+@contentType = application/json
+
+### ==========================================
+### 1. AUTENTICACIÓN
+### ==========================================
+
+### 1.1 Registrar nuevo usuario
+POST {{baseUrl}}/v1/auth/register
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "password123",
+  "role": "USER"
+}
+
+### 1.2 Login (obtener tokens)
+POST {{baseUrl}}/v1/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+> {%
+    client.global.set("accessToken", response.body.accessToken);
+    client.global.set("refreshToken", response.body.refreshToken);
+%}
+
+### 1.3 Login con usuario normal
+POST {{baseUrl}}/v1/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "user1",
+  "password": "user123"
+}
+
+### 1.4 Refrescar token
+POST {{baseUrl}}/v1/auth/refresh-token
+Content-Type: {{contentType}}
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### ==========================================
+### 2. GESTIÓN DE CLIENTES (Requiere autenticación)
+### ==========================================
+
+### 2.1 Crear cliente (requiere rol ADMIN o USER)
+POST {{baseUrl}}/v1/clientes
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "nombre": "Pedro González",
+  "email": "pedro.gonzalez@example.com"
+}
+
+### 2.2 Crear cliente con validaciones fallidas (debe dar error)
+POST {{baseUrl}}/v1/clientes
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "nombre": "Pe",
+  "email": "email-invalido"
+}
+
+### 2.3 Crear cliente con email duplicado (debe dar error)
+POST {{baseUrl}}/v1/clientes
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "nombre": "Juan Pérez",
+  "email": "juan.perez@example.com"
+}
+
+### ==========================================
+### 3. PRUEBAS DE SEGURIDAD
+### ==========================================
+
+### 3.1 Intentar acceder sin token (debe dar 403/401)
+POST {{baseUrl}}/v1/clientes
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Sin autenticación",
+  "email": "sin.auth@example.com"
+}
+
+### 3.2 Intentar acceder con token inválido (debe dar 403/401)
+POST {{baseUrl}}/v1/clientes
+Content-Type: {{contentType}}
+Authorization: Bearer token_invalido_12345
+
+{
+  "nombre": "Token inválido",
+  "email": "token.invalido@example.com"
+}
+
+### 3.3 Intentar acceder con token expirado (debe dar 403/401)
+POST {{baseUrl}}/v1/clientes
+Content-Type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjAwMDAwMDAwLCJleHAiOjE2MDAwMDAwMDB9.xyz
+
+{
+  "nombre": "Token expirado",
+  "email": "token.expirado@example.com"
+}
+
+### ==========================================
+### 4. EJEMPLOS CON CURL (PowerShell)
+### ==========================================
+
+### 4.1 Login con curl
+# curl -X POST http://localhost:9595/v1/auth/login `
+#   -H "Content-Type: application/json" `
+#   -d '{"username":"admin","password":"admin123"}'
+
+### 4.2 Crear cliente con curl
+# $token = "eyJhbGciOiJIUzI1NiIs..."  # Reemplazar con token real
+# curl -X POST http://localhost:9595/v1/clientes `
+#   -H "Content-Type: application/json" `
+#   -H "Authorization: Bearer $token" `
+#   -d '{"nombre":"Juan Pérez","email":"juan@example.com"}'
+
+### ==========================================
+### NOTAS:
+### ==========================================
+### - Los tokens se guardan automáticamente en variables globales
+### - Reemplaza {{accessToken}} con tu token real si es necesario
+### - Los endpoints de /v1/clientes solo son accesibles con rol ADMIN o USER
+### - El token expira en 1 hora (3600000 ms)
+### - El refresh token expira en 1 día (86400000 ms)
+### ==========================================
+

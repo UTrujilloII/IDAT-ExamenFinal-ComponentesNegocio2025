@@ -1,0 +1,523 @@
+{
+  "info": {
+    "name": "Sistema Biblioteca Universitaria - API",
+    "_postman_id": "biblioteca-api-2025",
+    "description": "Colección completa de endpoints para el Sistema de Gestión de Biblioteca Universitaria\n\nAutor: Jonathan Jiménez\nGitHub: https://github.com/vansfanelx/\n\nBase URL: http://localhost:9595/v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:9595/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "1. Autenticación",
+      "item": [
+        {
+          "name": "Login Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('token', jsonData.data.token);",
+                  "    console.log('Token guardado:', jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Iniciar sesión como administrador"
+          }
+        },
+        {
+          "name": "Login Usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('token', jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"usuario1\",\n  \"password\": \"usuario123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Iniciar sesión como usuario regular"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Libros",
+      "item": [
+        {
+          "name": "Listar Todos los Libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros",
+              "host": ["{{base_url}}"],
+              "path": ["libros"]
+            },
+            "description": "Obtener lista completa de libros (ADMIN y USUARIO)"
+          }
+        },
+        {
+          "name": "Obtener Libro por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/1",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "1"]
+            },
+            "description": "Obtener información detallada de un libro"
+          }
+        },
+        {
+          "name": "Obtener Libro por ISBN",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/isbn/978-0134685991",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "isbn", "978-0134685991"]
+            },
+            "description": "Buscar libro por código ISBN"
+          }
+        },
+        {
+          "name": "Crear Libro (ADMIN)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isbn\": \"978-0135957059\",\n  \"titulo\": \"The Pragmatic Programmer\",\n  \"autor\": \"David Thomas, Andrew Hunt\",\n  \"editorial\": \"Addison-Wesley\",\n  \"anioPublicacion\": 2019,\n  \"categoria\": \"Programación\",\n  \"copiasTotales\": 5,\n  \"copiasDisponibles\": 5,\n  \"descripcion\": \"De aprendiz a maestro: tu viaje hacia la maestría en programación\",\n  \"ubicacion\": \"Estante A1\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros",
+              "host": ["{{base_url}}"],
+              "path": ["libros"]
+            },
+            "description": "Crear un nuevo libro (solo ADMIN)"
+          }
+        },
+        {
+          "name": "Actualizar Libro (ADMIN)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"copiasTotales\": 7,\n  \"copiasDisponibles\": 7,\n  \"descripcion\": \"Descripción actualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros/1",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "1"]
+            },
+            "description": "Actualizar información de un libro"
+          }
+        },
+        {
+          "name": "Eliminar Libro (ADMIN)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/1",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "1"]
+            },
+            "description": "Eliminar un libro (solo si no tiene préstamos activos)"
+          }
+        },
+        {
+          "name": "Libros Disponibles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/disponibles",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "disponibles"]
+            },
+            "description": "Obtener solo libros con copias disponibles"
+          }
+        },
+        {
+          "name": "Buscar Libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/buscar?keyword=java",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "buscar"],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "java"
+                }
+              ]
+            },
+            "description": "Búsqueda global por título, autor, ISBN o categoría"
+          }
+        },
+        {
+          "name": "Buscar por Título",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/buscar/titulo?titulo=Effective",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "buscar", "titulo"],
+              "query": [
+                {
+                  "key": "titulo",
+                  "value": "Effective"
+                }
+              ]
+            },
+            "description": "Buscar libros por título"
+          }
+        },
+        {
+          "name": "Buscar por Autor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/buscar/autor?autor=Joshua",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "buscar", "autor"],
+              "query": [
+                {
+                  "key": "autor",
+                  "value": "Joshua"
+                }
+              ]
+            },
+            "description": "Buscar libros por autor"
+          }
+        },
+        {
+          "name": "Buscar por Categoría",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/buscar/categoria?categoria=Programación",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "buscar", "categoria"],
+              "query": [
+                {
+                  "key": "categoria",
+                  "value": "Programación"
+                }
+              ]
+            },
+            "description": "Buscar libros por categoría"
+          }
+        },
+        {
+          "name": "Obtener Categorías",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/categorias",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "categorias"]
+            },
+            "description": "Obtener lista de categorías únicas"
+          }
+        },
+        {
+          "name": "Estadísticas de Libros (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/estadisticas",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "estadisticas"]
+            },
+            "description": "Obtener estadísticas (total, disponibles)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Préstamos",
+      "item": [
+        {
+          "name": "Listar Todos los Préstamos (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos"]
+            },
+            "description": "Obtener todos los préstamos del sistema"
+          }
+        },
+        {
+          "name": "Obtener Préstamo por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/1",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "1"]
+            },
+            "description": "Obtener información detallada de un préstamo"
+          }
+        },
+        {
+          "name": "Préstamos de un Usuario",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/usuario/2",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "usuario", "2"]
+            },
+            "description": "Obtener todos los préstamos de un usuario"
+          }
+        },
+        {
+          "name": "Préstamos Activos de Usuario",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/usuario/2/activos",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "usuario", "2", "activos"]
+            },
+            "description": "Obtener préstamos activos (no devueltos) de un usuario"
+          }
+        },
+        {
+          "name": "Préstamos de un Libro (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/libro/1",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "libro", "1"]
+            },
+            "description": "Obtener historial de préstamos de un libro"
+          }
+        },
+        {
+          "name": "Crear Préstamo (ADMIN)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": 2,\n  \"libroId\": 1,\n  \"diasPrestamo\": 14,\n  \"observaciones\": \"Préstamo estándar\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/prestamos",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos"]
+            },
+            "description": "Crear un nuevo préstamo"
+          }
+        },
+        {
+          "name": "Registrar Devolución (ADMIN)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"observaciones\": \"Libro devuelto en buen estado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/prestamos/1/devolver",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "1", "devolver"]
+            },
+            "description": "Registrar devolución de un libro"
+          }
+        },
+        {
+          "name": "Préstamos Vencidos (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/vencidos",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "vencidos"]
+            },
+            "description": "Obtener préstamos que superaron la fecha de devolución"
+          }
+        },
+        {
+          "name": "Préstamos con Multa (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/con-multa",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "con-multa"]
+            },
+            "description": "Obtener préstamos que tienen multa pendiente"
+          }
+        },
+        {
+          "name": "Actualizar Estados (ADMIN)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/actualizar-estados",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "actualizar-estados"]
+            },
+            "description": "Actualizar estados de préstamos (marcar vencidos)"
+          }
+        },
+        {
+          "name": "Multas de Usuario (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/usuario/2/multas",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "usuario", "2", "multas"]
+            },
+            "description": "Calcular total de multas de un usuario"
+          }
+        },
+        {
+          "name": "Estadísticas de Préstamos (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/estadisticas",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "estadisticas"]
+            },
+            "description": "Obtener estadísticas (total, activos, devueltos, vencidos)"
+          }
+        },
+        {
+          "name": "Últimos Préstamos (ADMIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/prestamos/ultimos?limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["prestamos", "ultimos"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Obtener los últimos N préstamos realizados"
+          }
+        }
+      ]
+    }
+  ]
+}
+
