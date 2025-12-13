@@ -10,10 +10,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Repositorio para la entidad Prestamo.
- * Proporciona métodos para realizar operaciones CRUD y consultas personalizadas sobre préstamos.
+ * Repositorio JPA para la entidad Prestamo.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Repository

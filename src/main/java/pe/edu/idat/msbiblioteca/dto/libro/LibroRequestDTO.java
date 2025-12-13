@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
  * DTO para la creación de un nuevo libro en el sistema.
  * Contiene validaciones para garantizar la integridad de los datos.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Data
@@ -82,4 +81,3 @@ public class LibroRequestDTO {
     @Size(max = 50, message = "La ubicación no puede exceder 50 caracteres")
     private String ubicacion;
 }
-

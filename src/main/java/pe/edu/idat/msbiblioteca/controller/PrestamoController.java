@@ -25,7 +25,6 @@ import java.util.List;
  * - ADMIN: Acceso total a todos los préstamos y operaciones
  * - USUARIO: Solo puede ver y gestionar sus propios préstamos
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @RestController
@@ -345,4 +344,3 @@ public class PrestamoController {
                 .build());
     }
 }
-

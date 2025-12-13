@@ -10,7 +10,6 @@ import java.time.LocalDate;
  * DTO para la respuesta de información de un préstamo.
  * Incluye información del usuario y libro asociados.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Data
@@ -88,4 +87,3 @@ public class PrestamoResponseDTO {
      */
     private String observaciones;
 }
-

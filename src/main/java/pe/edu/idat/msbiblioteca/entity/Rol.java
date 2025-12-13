@@ -6,10 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 /**
- * Entidad que representa un rol de usuario en el sistema de biblioteca.
- * Define los permisos y privilegios de acceso (ADMIN, USUARIO).
+ * Entidad que representa un rol del sistema (por ejemplo ROLE_ADMIN, ROLE_USER).
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Entity

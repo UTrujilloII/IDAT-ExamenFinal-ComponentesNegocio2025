@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  * Servicio que gestiona la lógica de negocio relacionada con los libros.
  * Proporciona operaciones CRUD y consultas personalizadas.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Service

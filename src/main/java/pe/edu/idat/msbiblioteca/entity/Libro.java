@@ -12,7 +12,6 @@ import java.util.List;
  * Entidad que representa un libro en el sistema de biblioteca.
  * Contiene información del libro como título, autor, ISBN, categoría, etc.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Entity
@@ -132,4 +131,3 @@ public class Libro {
         }
     }
 }
-

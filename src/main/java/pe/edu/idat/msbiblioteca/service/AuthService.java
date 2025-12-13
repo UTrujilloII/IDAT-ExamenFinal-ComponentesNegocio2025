@@ -30,7 +30,6 @@ import java.util.Set;
  * Servicio para gestionar la autenticación y registro de usuarios.
  * Proporciona operaciones de login, registro y renovación de tokens JWT.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Service

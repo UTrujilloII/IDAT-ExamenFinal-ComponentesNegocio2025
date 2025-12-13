@@ -9,10 +9,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 /**
- * Entidad que representa un préstamo de libro en el sistema de biblioteca.
- * Gestiona la relación entre usuarios y libros prestados, incluyendo fechas y multas.
+ * Entidad que representa un préstamo de libro.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Entity
@@ -125,4 +123,3 @@ public class Prestamo {
         this.multa = calcularMulta();
     }
 }
-

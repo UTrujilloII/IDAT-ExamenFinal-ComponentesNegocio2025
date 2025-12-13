@@ -22,10 +22,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Servicio que gestiona la lógica de negocio relacionada con los préstamos de libros.
- * Maneja la creación, consulta, actualización y devolución de préstamos.
+ * Servicio para gestionar préstamos de libros.
+ * Contiene lógica de negocio para creación, devolución y consultas de préstamos.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Service

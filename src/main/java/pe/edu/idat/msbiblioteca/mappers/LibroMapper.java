@@ -9,10 +9,8 @@ import pe.edu.idat.msbiblioteca.dto.libro.LibroResponseDTO;
 import pe.edu.idat.msbiblioteca.entity.Libro;
 
 /**
- * Mapper para convertir entre entidades Libro y sus DTOs.
- * Utiliza MapStruct para la conversión automática.
+ * Mapper para convertir entre la entidad Libro y sus DTOs.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Mapper(componentModel = "spring",
@@ -55,4 +53,3 @@ public interface LibroMapper {
     @Mapping(target = "prestamos", ignore = true)
     void updateEntityFromDTO(LibroRequestDTO dto, @MappingTarget Libro entity);
 }
-

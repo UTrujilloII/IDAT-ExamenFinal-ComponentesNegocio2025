@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 /**
  * DTO para registrar la devolución de un libro.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Data

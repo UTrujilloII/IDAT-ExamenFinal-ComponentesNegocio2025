@@ -8,9 +8,7 @@ import pe.edu.idat.msbiblioteca.entity.Prestamo;
 
 /**
  * Mapper para convertir entre entidades Prestamo y sus DTOs.
- * Utiliza MapStruct para la conversión automática.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Mapper(componentModel = "spring",
@@ -33,4 +31,3 @@ public interface PrestamoMapper {
     @Mapping(target = "diasRetraso", expression = "java(entity.calcularDiasRetraso())")
     PrestamoResponseDTO toResponseDTO(Prestamo entity);
 }
-

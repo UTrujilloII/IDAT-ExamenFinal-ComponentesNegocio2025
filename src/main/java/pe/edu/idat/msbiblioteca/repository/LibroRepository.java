@@ -10,10 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Repositorio para la entidad Libro.
- * Proporciona métodos para realizar operaciones CRUD y consultas personalizadas sobre libros.
+ * Repositorio JPA para la entidad Libro.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Repository
@@ -104,4 +102,3 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     @Query("SELECT COUNT(l) FROM Libro l WHERE l.copiasDisponibles > 0 AND l.estado = 'DISPONIBLE'")
     Long contarLibrosDisponibles();
 }
-

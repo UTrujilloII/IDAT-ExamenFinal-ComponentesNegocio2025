@@ -11,7 +11,6 @@ import java.time.LocalDate;
  * DTO para la creación de un nuevo préstamo.
  * Contiene las validaciones necesarias para registrar un préstamo.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Data
@@ -49,4 +48,3 @@ public class PrestamoRequestDTO {
     @Size(max = 500, message = "Las observaciones no pueden exceder 500 caracteres")
     private String observaciones;
 }
-

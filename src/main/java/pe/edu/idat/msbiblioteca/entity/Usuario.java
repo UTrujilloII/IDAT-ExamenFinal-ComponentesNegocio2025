@@ -14,7 +14,6 @@ import java.util.Set;
  * Entidad que representa un usuario del sistema de biblioteca.
  * Puede tener roles de ADMIN o USUARIO con diferentes privilegios.
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @Entity

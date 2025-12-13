@@ -22,7 +22,6 @@ import java.util.List;
  * - ADMIN: Puede crear, actualizar y eliminar libros
  * - USUARIO: Solo puede consultar libros
  *
- * @author Jonathan Jiménez
  * @see <a href="https://github.com/vansfanelx/">GitHub Profile</a>
  */
 @RestController
@@ -310,4 +309,3 @@ public class LibroController {
                 .build());
     }
 }
-
