@@ -51,24 +51,33 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> 
-                auth.requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers("/api/libros/**").hasAnyAuthority("ADMIN", "USUARIO")
-                    .requestMatchers("/api/prestamos/mis-prestamos").hasAnyAuthority("ADMIN", "USUARIO")
-                    .requestMatchers("/api/prestamos/**").hasAuthority("ADMIN")
-                    .requestMatchers("/api/usuarios/**").hasAuthority("ADMIN")
-                    .anyRequest().authenticated()
-            );
-        
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth ->
+                        auth
+                                // ✅ Swagger / OpenAPI (PUBLICO)
+                                .requestMatchers(
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html"
+                                ).permitAll()
+
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/libros/**").hasAnyAuthority("ADMIN", "USUARIO")
+                                .requestMatchers("/api/prestamos/mis-prestamos").hasAnyAuthority("ADMIN", "USUARIO")
+                                .requestMatchers("/api/prestamos/**").hasAuthority("ADMIN")
+                                .requestMatchers("/api/usuarios/**").hasAuthority("ADMIN")
+                                .anyRequest().authenticated()
+                );
+
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        
+
         return http.build();
     }
+
 }
