@@ -67,9 +67,10 @@ public class PrestamoServiceImpl implements PrestamoService {
         prestamo.setLibro(libro);
         prestamo.setFechaPrestamo(fechaPrestamo);
         prestamo.setFechaDevolucion(fechaDevolucion);
-        prestamo.setEstado("ACTIVO");  // <<--- estado activo
+        prestamo.setEstado("ACTIVO");
 
         libro.setEjemplaresDisponibles(libro.getEjemplaresDisponibles() - 1);
+        libroRepository.save(libro); // Se guarda el stock actualizado del libro (descuento por préstamo)
 
         Prestamo guardado = prestamoRepository.save(prestamo);
 
@@ -113,9 +114,10 @@ public class PrestamoServiceImpl implements PrestamoService {
         prestamo.setLibro(libro);
         prestamo.setFechaPrestamo(fechaPrestamo);
         prestamo.setFechaDevolucion(fechaDevolucion);
-        prestamo.setEstado("ACTIVO");  // <<--- estado activo
+        prestamo.setEstado("ACTIVO");
 
         libro.setEjemplaresDisponibles(libro.getEjemplaresDisponibles() - 1);
+        libroRepository.save(libro); // Se guarda el stock actualizado del libro (descuento por préstamo del usuario)
 
         Prestamo guardado = prestamoRepository.save(prestamo);
 
@@ -137,10 +139,10 @@ public class PrestamoServiceImpl implements PrestamoService {
                                 " para el usuario " + usuario.getUsername()
                 ));
 
-        if ("DEVUELTO".equalsIgnoreCase(prestamo.getEstado())) {
+        if (!"ACTIVO".equalsIgnoreCase(prestamo.getEstado())) { // solo se permite devolver si el préstamo está ACTIVO
             throw new ReglaNegocioException(
-                    "El préstamo con id " + idPrestamo + " ya fue devuelto"
-            );
+                    "Solo se puede devolver un préstamo con estado ACTIVO. Estado actual: " + prestamo.getEstado()
+            ); // evita devolver préstamos DEVUELTO/CANCELADO/u otros estados
         }
 
         // se marca como devuelto
@@ -149,7 +151,17 @@ public class PrestamoServiceImpl implements PrestamoService {
 
         // se devuelve al stock del libro
         Libro libro = prestamo.getLibro();
+
+        if (libro.getEjemplaresDisponibles() >= libro.getEjemplaresTotales()) { //evita que disponibles supere el total
+            throw new ReglaNegocioException(
+                    "No se puede devolver el préstamo porque el stock disponible (" + libro.getEjemplaresDisponibles() +
+                            ") ya es igual o mayor al total (" + libro.getEjemplaresTotales() + ") para el libro '" +
+                            libro.getTitulo() + "' (id " + libro.getIdLibro() + ")"
+            );
+        }
+
         libro.setEjemplaresDisponibles(libro.getEjemplaresDisponibles() + 1);
+        libroRepository.save(libro); // Se guarda el stock actualizado del libro (aumenta por devolución del usuario)
 
         Prestamo guardado = prestamoRepository.save(prestamo);
 
@@ -165,17 +177,27 @@ public class PrestamoServiceImpl implements PrestamoService {
                         "No se encontró el préstamo con id " + idPrestamo
                 ));
 
-        if ("DEVUELTO".equalsIgnoreCase(prestamo.getEstado())) {
+        if (!"ACTIVO".equalsIgnoreCase(prestamo.getEstado())) { // solo se permite devolver si el préstamo está ACTIVO
             throw new ReglaNegocioException(
-                    "El préstamo con id " + idPrestamo + " ya fue devuelto"
-            );
+                    "Solo se puede devolver un préstamo con estado ACTIVO. Estado actual: " + prestamo.getEstado()
+            ); // evita devolver préstamos DEVUELTO/CANCELADO/u otros estados
         }
 
         prestamo.setEstado("DEVUELTO");
         prestamo.setFechaDevolucion(LocalDate.now());
 
         Libro libro = prestamo.getLibro();
+
+        if (libro.getEjemplaresDisponibles() >= libro.getEjemplaresTotales()) { //  evita que disponibles supere el total
+            throw new ReglaNegocioException(
+                    "No se puede devolver el préstamo porque el stock disponible (" + libro.getEjemplaresDisponibles() +
+                            ") ya es igual o mayor al total (" + libro.getEjemplaresTotales() + ") para el libro '" +
+                            libro.getTitulo() + "' (id " + libro.getIdLibro() + ")"
+            );
+        }
+
         libro.setEjemplaresDisponibles(libro.getEjemplaresDisponibles() + 1);
+        libroRepository.save(libro); // Se guarda el stock actualizado del libro (aumenta por devolución realizada por ADMIN)
 
         Prestamo guardado = prestamoRepository.save(prestamo);
 
@@ -334,6 +356,15 @@ public class PrestamoServiceImpl implements PrestamoService {
         }
 
         Libro libro = prestamo.getLibro();
+
+        if (libro.getEjemplaresDisponibles() >= libro.getEjemplaresTotales()) { // evita superar el total al cancelar (también devuelve stock)
+            throw new ReglaNegocioException(
+                    "No se puede cancelar el préstamo porque el stock disponible (" + libro.getEjemplaresDisponibles() +
+                            ") ya es igual o mayor al total (" + libro.getEjemplaresTotales() + ") para el libro '" +
+                            libro.getTitulo() + "' (id " + libro.getIdLibro() + ")"
+            );
+        }
+
         libro.setEjemplaresDisponibles(
                 libro.getEjemplaresDisponibles() + 1
         );
@@ -365,6 +396,15 @@ public class PrestamoServiceImpl implements PrestamoService {
 
         if ("ACTIVO".equalsIgnoreCase(prestamo.getEstado())) {
             Libro libro = prestamo.getLibro();
+
+            if (libro.getEjemplaresDisponibles() >= libro.getEjemplaresTotales()) { // evita superar el total al cancelar (admin)
+                throw new ReglaNegocioException(
+                        "No se puede cancelar el préstamo porque el stock disponible (" + libro.getEjemplaresDisponibles() +
+                                ") ya es igual o mayor al total (" + libro.getEjemplaresTotales() + ") para el libro '" +
+                                libro.getTitulo() + "' (id " + libro.getIdLibro() + ")"
+                );
+            }
+
             libro.setEjemplaresDisponibles(
                     libro.getEjemplaresDisponibles() + 1
             );

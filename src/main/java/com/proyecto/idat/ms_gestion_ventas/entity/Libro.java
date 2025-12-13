@@ -29,6 +29,7 @@ public class Libro {
 
     private Integer ejemplaresTotales;
 
+    @Column(nullable = false) //  evita que ejemplaresDisponibles sea null en BD (stock siempre numérico)
     private Integer ejemplaresDisponibles;
 
     @ManyToOne
