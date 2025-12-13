@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component // ¡CRÍTICO! Esto la registra como un bean.
+@Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override

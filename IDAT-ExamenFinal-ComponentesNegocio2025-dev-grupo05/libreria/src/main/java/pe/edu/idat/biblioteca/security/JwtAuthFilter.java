@@ -21,13 +21,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getServletPath();
-        return path.startsWith("/v1/auth/") ||
-                path.startsWith("/v3/api-docs") ||
-                path.startsWith("/swagger");
-    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -37,6 +31,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            // Permite que la petición continúe. Spring Security se encargará de:
+            // 1. Si es /v1/auth/login (permitAll), permite el acceso.
+            // 2. Si es una ruta protegida, lanza una excepción de autenticación 401.
             filterChain.doFilter(request, response);
             return;
         }

@@ -32,7 +32,7 @@ public class SecurityConfig {
     // --- DEPENDENCIA REQUERIDA PARA AUTENTICACIÓN ---
     private final UserDetailsService userDetailsService;
 
-
+/*
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -63,8 +63,10 @@ public class SecurityConfig {
 
         return http.build();
     }
-
+*/        //ELIMINACION TEMPORAL PARA PRUEBAS
     // --- MÉTODOS DE AUTENTICACIÓN Y CIFRADO ---
+
+
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -83,4 +85,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }

@@ -25,9 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         "Usuario no encontrado con email: " + email
                 ));
 
-        // CRÍTICO: Tu Entidad Usuario DEBE implementar la interfaz UserDetails
-        // para que pueda ser devuelta directamente aquí.
-        // Si no lo hace, necesitarías un mapeador para construir un objeto UserDetails.
+
 
         if (!usuario.getActivo()) {
             throw new UsernameNotFoundException("El usuario se encuentra inactivo.");
